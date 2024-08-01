@@ -1,8 +1,9 @@
 ## API Specification: Authentication Service
 
 ### Base URL
+
 ```
-https://api.example.com/v1
+https://api.example.com
 ```
 
 ### Endpoints
@@ -14,6 +15,7 @@ https://api.example.com/v1
 **Description:** Registers a new user.
 
 **Request:**
+
 ```json
 {
   "username": "string",
@@ -23,6 +25,7 @@ https://api.example.com/v1
 ```
 
 **Response:**
+
 - **201 Created**
   ```json
   {
@@ -49,6 +52,7 @@ https://api.example.com/v1
 **Description:** Authenticates a user and returns a JWT token.
 
 **Request:**
+
 ```json
 {
   "email": "string",
@@ -57,6 +61,7 @@ https://api.example.com/v1
 ```
 
 **Response:**
+
 - **200 OK**
   ```json
   {
@@ -77,6 +82,7 @@ https://api.example.com/v1
 **Description:** Refreshes the JWT token.
 
 **Request:**
+
 ```json
 {
   "ref_token": "string"
@@ -84,6 +90,7 @@ https://api.example.com/v1
 ```
 
 **Response:**
+
 - **200 OK**
   ```json
   {
@@ -104,11 +111,13 @@ https://api.example.com/v1
 **Description:** Accesses a protected resource. Requires a valid JWT token.
 
 **Request Headers:**
+
 ```
 Authorization: Bearer <JWT token>
 ```
 
 **Response:**
+
 - **200 OK**
   ```json
   {
@@ -159,7 +168,11 @@ Authorization: Bearer <JWT token>
 
 ### Example Flow
 
-1. **Register a User:** The client sends a `POST` request to `/auth/register` with the user's username, email, and password.
-2. **Login a User:** The client sends a `POST` request to `/auth/login` with the user's email and password to receive a JWT token.
-3. **Access Protected Resource:** The client sends a `GET` request to `/protected/resource` with the `Authorization` header set to `Bearer <JWT token>`.
-4. **Refresh Token:** The client sends a `POST` request to `/auth/refresh` with the current JWT token to receive a new token.
+1. **Register a User:** The client sends a `POST` request to `/auth/register` with the user's username, email, and
+   password.
+2. **Login a User:** The client sends a `POST` request to `/auth/login` with the user's email and password to receive a
+   JWT token.
+3. **Access Protected Resource:** The client sends a `GET` request to `/protected/resource` with the `Authorization`
+   header set to `Bearer <JWT token>`.
+4. **Refresh Token:** The client sends a `POST` request to `/auth/refresh` with the current JWT token to receive a new
+   token.
