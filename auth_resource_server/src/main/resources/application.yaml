@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: resource_server
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080
+          jwk-set-uri: http://localhost:8080/.well-know/jwks.json
+
+server:
+  port: 8081
