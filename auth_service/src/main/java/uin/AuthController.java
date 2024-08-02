@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import uin.dto.AccessTokenDTO;
 import uin.dto.LoginDTO;
 import uin.dto.RegisterDTO;
+import uin.dto.SuccessDTO;
 
 @RestController
 @RequestMapping("auth")
@@ -19,8 +20,9 @@ public class AuthController {
 
     @PostMapping("register")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void accountRegister(@Valid @RequestBody RegisterDTO registerDTO) {
+    public Object accountRegister(@Valid @RequestBody RegisterDTO registerDTO) {
         accountService.addNewAccount(registerDTO);
+        return new SuccessDTO("user register success");
     }
 
     @PostMapping(value = "login")

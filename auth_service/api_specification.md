@@ -32,12 +32,6 @@ https://api.example.com
     "message": "User registered successfully."
   }
   ```
-- **400 Bad Request**
-  ```json
-  {
-    "error": "Invalid input data."
-  }
-  ```
 - **409 Conflict**
   ```json
   {
@@ -68,102 +62,26 @@ https://api.example.com
     "acc_token": "string"
   }
   ```
-- **401 Unauthorized**
-  ```json
-  {
-    "error": "Invalid credentials."
-  }
-  ```
 
-#### 3. Token Refresh
+#### 3. JWK 
 
-**Endpoint:** `/auth/refresh`  
-**Method:** `POST`  
-**Description:** Refreshes the JWT token.
-
-**Request:**
-
-```json
-{
-  "ref_token": "string"
-}
-```
-
-**Response:**
-
-- **200 OK**
-  ```json
-  {
-    "token": "string"
-  }
-  ```
-- **401 Unauthorized**
-  ```json
-  {
-    "error": "Invalid token."
-  }
-  ```
-
-#### 4. Access Protected Resource
-
-**Endpoint:** `/protected/resource`  
+**Endpoint:** `/.well-know/jwks.json`  
 **Method:** `GET`  
-**Description:** Accesses a protected resource. Requires a valid JWT token.
+**Description:** KEY for verify the token.
 
-**Request Headers:**
-
-```
-Authorization: Bearer <JWT token>
-```
 
 **Response:**
 
 - **200 OK**
   ```json
-  {
-    "data": "protected data"
-  }
-  ```
-- **401 Unauthorized**
-  ```json
-  {
-    "error": "Invalid or missing token."
-  }
-  ```
-
-### Error Handling
-
-#### Common Errors
-
-- **400 Bad Request**
-  ```json
-  {
-    "error": "Bad request."
-  }
-  ```
-- **401 Unauthorized**
-  ```json
-  {
-    "error": "Unauthorized."
-  }
-  ```
-- **403 Forbidden**
-  ```json
-  {
-    "error": "Forbidden."
-  }
-  ```
-- **404 Not Found**
-  ```json
-  {
-    "error": "Not found."
-  }
-  ```
-- **500 Internal Server Error**
-  ```json
-  {
-    "error": "Internal server error."
-  }
+   {
+      "kty": "RSA",
+      "kid": "1234",
+      "use": "sig",
+      "alg": "RS256",
+      "n": "0vx7agoebGcQSuuPiLJXZptN3cRR6mSkVPbGHcxZSMY1lmxtcP6LbUlbEFAHAAoxczDPjz4m8Zbcj53kRG4FPA1UcuY3NWWdUQPLr5xyMO5StzLJ3b8S5OqLF0Xjjjk9U6c2A_6m8Gn8EbS3iJIBg-8T_5nlD4zcmOZXmDrD4H5QhZnF0uN_t9QdO2_5DOwrgwz_tK-1kRXzzCRksRk7GvJQF_r5K_S5PhLa0E3tMiWjglqW1m_pH0_95qJgV3bTlK2dVDbTjrZ1SHiJ7HAFf3mIGtCbuPZBYbO5q2pU6EqJw3-bPbLkDW3zBQKL7C4xRXm6ZpJ9sU2J36dsYY0_splLecQ",
+      "e": "AQAB"
+    }
   ```
 
 ### Example Flow
@@ -172,7 +90,3 @@ Authorization: Bearer <JWT token>
    password.
 2. **Login a User:** The client sends a `POST` request to `/auth/login` with the user's email and password to receive a
    JWT token.
-3. **Access Protected Resource:** The client sends a `GET` request to `/protected/resource` with the `Authorization`
-   header set to `Bearer <JWT token>`.
-4. **Refresh Token:** The client sends a `POST` request to `/auth/refresh` with the current JWT token to receive a new
-   token.
